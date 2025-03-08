@@ -1,1 +1,30 @@
 
+yaml
+name: assignment
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js (Example)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run security checks
+        run: npm audit --audit-level=high
+
+      - name: Run tests
+        run: npm test
